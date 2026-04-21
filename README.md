@@ -34,7 +34,7 @@ The framework systematically measures two distinct types of transferability:
 * **Environment Transferability ($\delta_{e \to e'}$):** This metric represents the effectiveness-gap of a learned agent $a^\ast$ when evaluated on a destination environment $e'$ compared to its source training environment $e$. 
     * To facilitate this, an environment transformation triplet $(\phi_A, \phi_O, \phi_S)$ is utilized to map actions, observations, and states, making the destination environment compatible with the agent. 
     * The resulting transformed environment is denoted as $\phi(e', \phi_A, \phi_O, \phi_S)$.
-    * Formal Definition: $\delta_{e \to e'} = f_q(a^\ast, \phi(e', \phi_A, \phi_O, \phi_S), \phi_S(S_{e,test})) - f_q(a^\ast, e, S_{e,test})$.
+    * Formal Definition: $\delta_{e \to e'} = f_q(a^\ast, \phi(e', \phi_A, \phi_O, \phi_S), \phi_S(S<sub>e,test</sub>)) - f_q(a^\ast, e, S_{e,test})$.
 * **Task Transferability ($\delta_{f_q \to f_q'}$):** This metric measures the effectiveness difference of the agent $a^\ast$ when evaluated using a new behavior quality function $f_q'$ compared against reference quality values.
     * Formal Definition: $\delta_{f_q \to f_q'} = \frac{f_q'(a^\ast, e, S_{e,test})}{f_q'^\ast} - \frac{f_q(a^\ast, e, S_{e,test})}{f_q^\ast}$.
 
