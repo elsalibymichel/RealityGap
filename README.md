@@ -26,17 +26,17 @@ This repository strictly separates the definitions of environments, learning alg
 * **Agent:** An agent is defined as a discrete-time dynamical system $(f_{a,state}, f_{a,out}, s_{a}^{(0)})$ characterized by an input space, output space, and state space.
 * **Environment:** An environment is similarly defined as a discrete-time dynamical system $(f_{e,state}, f_{e,out}, s_{e}^{(0)})$.
 * **Task:** A task is formalized as a tuple $(e, S_{e,init}, f_q)$, where $e$ is an environment, $S_{e,init}$ is a set of initial states, and $f_q$ is a behavior quality function.
-* **Learning Technique ($L$):** A procedure that solves an optimization problem to maximize the behavior quality function, returning a learned agent $a^*$.
+* **Learning Technique ($L$):** A procedure that solves an optimization problem to maximize the behavior quality function, returning a learned agent $a^\ast$.
 
 ### 2. Transferability Metrics
 The framework systematically measures two distinct types of transferability:
 
-* **Environment Transferability ($\delta_{e \to e'}$):** This metric represents the effectiveness-gap of a learned agent $a^*$ when evaluated on a destination environment $e'$ compared to its source training environment $e$. 
+* **Environment Transferability ($\delta_{e \to e'}$):** This metric represents the effectiveness-gap of a learned agent $a^\ast$ when evaluated on a destination environment $e'$ compared to its source training environment $e$. 
     * To facilitate this, an environment transformation triplet $(\phi_A, \phi_O, \phi_S)$ is utilized to map actions, observations, and states, making the destination environment compatible with the agent. 
     * The resulting transformed environment is denoted as $\phi(e', \phi_A, \phi_O, \phi_S)$.
-    * Formal Definition: $\delta_{e \to e'} = f_q(a^*, \phi(e', \phi_A, \phi_O, \phi_S), \phi_S(S_{e,test})) - f_q(a^*, e, S_{e,test})$.
-* **Task Transferability ($\delta_{f_q \to f_q'}$):** This metric measures the effectiveness difference of the agent $a^*$ when evaluated using a new behavior quality function $f_q'$ compared against reference quality values.
-    * Formal Definition: $\delta_{f_q \to f_q'} = \frac{f_q'(a^*, e, S_{e,test})}{f_q'^*} - \frac{f_q(a^*, e, S_{e,test})}{f_q^*}$.
+    * Formal Definition: $\delta_{e \to e'} = f_q(a^\ast, \phi(e', \phi_A, \phi_O, \phi_S), \phi_S(S_{e,test})) - f_q(a^\ast, e, S_{e,test})$.
+* **Task Transferability ($\delta_{f_q \to f_q'}$):** This metric measures the effectiveness difference of the agent $a^\ast$ when evaluated using a new behavior quality function $f_q'$ compared against reference quality values.
+    * Formal Definition: $\delta_{f_q \to f_q'} = \frac{f_q'(a^\ast, e, S_{e,test})}{f_q'^\ast} - \frac{f_q(a^\ast, e, S_{e,test})}{f_q^\ast}$.
 
 ### 3. Software Architecture
 * **Paradigm-Agnostic `Agent` Protocol:** The evaluation engine requires the agent to implement a standard prediction method, mapping inputs to outputs as defined by the discrete-time dynamical system formalization.
@@ -138,8 +138,8 @@ experiment_LTs = [
 results = compare_task_transferability(
     env=env_base,
     reward_fn_prime=centered_cartpole_reward,
-    reference_quality=500.0,         # f_q^*
-    reference_quality_prime=500.0,   # f_q'^*
+    reference_quality=500.0,         # f_q^\ast
+    reference_quality_prime=500.0,   # f_q'^\ast
     learning_techniques=experiment_LTs,
     n_repetitions=2,
     n_eval_episodes=5,
