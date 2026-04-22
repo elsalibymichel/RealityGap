@@ -1,1 +1,12 @@
-./idea
+# PyCharm / IntelliJ files
+.idea/
+cmake-build-*/
+*.iws
+out/
+
+# Python metadata and environments
+*.egg-info/
+__pycache__/
+.venv/
+build/
+dist/
