@@ -1,8 +1,8 @@
 from typing import Dict, Any
 import gymnasium as gym
-from rg_mitigation_technique import RGMitigationTechnique
+from learning_techniques.rg_mitigation_technique import RGMitigationTechnique
 from learning_techniques.learning_technique import LearningTechnique
-from rg_mitigation_wrappers import DomainRandomizationWrapper, ObservationNoiseWrapper
+from learning_techniques.rg_mitigation_wrappers import DomainRandomizationWrapper, ObservationNoiseWrapper
 
 class DomainRandomizationMitigation(RGMitigationTechnique):
     """Applies Domain Randomization during training."""

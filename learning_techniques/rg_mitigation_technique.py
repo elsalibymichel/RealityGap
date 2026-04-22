@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict
 import gymnasium as gym
-from learning_technique import LearningTechnique
+
+from learning_techniques.learning_technique import LearningTechnique
 from misc.agent import Agent
 
 

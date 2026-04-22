@@ -3,11 +3,9 @@ from typing import Dict, Any
 import gymnasium as gym
 from stable_baselines3 import PPO, DQN
 
-from learning_techniques.learning_technique import LearningTechnique, create_sb3_technique
+from learning_techniques.learning_technique import create_sb3_technique
 from learning_techniques.rg_mitigation_techniques import DomainRandomizationMitigation, ObservationNoiseMitigation
-from misc.agent import Agent
 from transferability import transferability_comparator
-from learning_techniques.rg_mitigation_wrappers import DomainRandomizationWrapper, ObservationNoiseWrapper
 from environments.env_parameters_handler import apply_env_params
 
 
