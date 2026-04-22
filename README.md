@@ -48,7 +48,7 @@ The framework systematically measures two distinct types of transferability:
 
 ## Usage Examples
 
-The `examples/` directory contains fully executable scripts demonstrating the practical application of the evaluation framework. 
+The `usage/` directory contains fully executable scripts demonstrating the practical application of the evaluation framework. 
 The following snippets highlight the core logic utilized in these scripts to measure both environment and task transferability.
 
 ### Example 1: Measuring Environment Transferability (Benchmarking Mitigations)
@@ -174,13 +174,13 @@ Once the dependencies are installed, you can execute the provided benchmark scri
 To run the environment transferability benchmark:
 
 ```bash
-python examples/environment_transferability_example.py
+python usage/environment_transferability_example.py
 ```
 
 To run the task transferability benchmark:
 
 ```bash
-python examples/task_transferability_example.py
+python usage/task_transferability_example.py
 ```
 
 ---
@@ -201,7 +201,7 @@ python examples/task_transferability_example.py
 ├── transferability/
 │   ├── transferability_evaluator.py    # Mathematical engine for delta calculations
 │   └── transferability_comparator.py   # Training loop execution and visualization
-└── examples/
+└── usage/
     ├── environment_transferability_example.py
     └── task_transferability_example.py
 ```
