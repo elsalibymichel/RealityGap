@@ -179,13 +179,15 @@ Once the dependencies are installed, you can execute the provided benchmark scri
 To run the environment transferability benchmark:
 
 ```bash
-python usage/environment_transferability_example.py
+cd usage
+python environment_transferability_example.py
 ```
 
 To run the task transferability benchmark:
 
 ```bash
-python usage/task_transferability_example.py
+cd usage
+python task_transferability_example.py
 ```
 
 ---
