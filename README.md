@@ -163,8 +163,13 @@ Clone the repository and install the specified dependencies:
 
 ```bash
 git clone https://github.com/elsalibymichel/RealityGap.git
-cd transferability-evaluator
+cd RealityGap
+
+# 1. Install external dependencies
 pip install -r requirements.txt
+
+# 2. Install the framework in editable mode
+pip install -e .
 ```
 
 ### Running an Example

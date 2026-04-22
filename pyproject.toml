@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reality_gap"
+version = "0.1.0"
+description = "A modular framework to quantify the reality-gap and agent transferability"
+readme = "README.md"
+requires-python = ">=3.8"
+# This dynamically pulls your dependencies from your existing file
+dependencies = [
+    "gymnasium==1.2.3",
+    "stable_baselines3==2.8.0",
+    "numpy==2.4.4",
+    "matplotlib==3.10.8",
+    "torch==2.11.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["environments*", "learning_techniques*", "transferability*", "misc*", "usage*"]
