@@ -27,8 +27,8 @@ if __name__ == "__main__":
     apply_env_params(env_src.unwrapped, src_config)
     env_dst = gym.make("CartPole-v1")
     apply_env_params(env_dst.unwrapped, dst_config)
-    base_ppo = create_sb3_technique(PPO, name="PPO", timesteps=3000, policy="MlpPolicy", device='cpu')
-    base_dqn = create_sb3_technique(DQN, name="DQN", timesteps=3000, policy="MlpPolicy")
+    base_ppo = create_sb3_technique(PPO, name="PPO", timesteps=5000, policy="MlpPolicy", device='cpu')
+    base_dqn = create_sb3_technique(DQN, name="DQN", timesteps=5000, policy="MlpPolicy")
     if experiment_type == "rg_mitigations":
         experiment_LTs = [
             DomainRandomizationMitigation(
@@ -58,8 +58,8 @@ if __name__ == "__main__":
         phi_action=phi_action_identity,
         phi_observation_inverse=phi_observation_inv_identity,
         learning_techniques=experiment_LTs,
-        n_repetitions=30,
-        n_eval_episodes=100,
+        n_repetitions=100,
+        n_eval_episodes=1000,
         save_fig=True,
         exp_name=f"results/comparison_{experiment_type}"
     )

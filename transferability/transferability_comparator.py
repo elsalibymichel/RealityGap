@@ -188,13 +188,13 @@ def _print_summary_statistics(results: Dict[str, Any]):
     """Prints a formatted summary of the results to the console."""
     for name, metrics in results.items():
         print(f"\n=== {name} ===")
-        print(f"Source Quality f_q(e): Mean = {np.mean(metrics['f_q_e']):.2f}, Var = {np.var(metrics['f_q_e']):.2f}")
+        print(f"Source Quality f_q(e): Mean = {np.mean(metrics['f_q_e']):.2f}, SD = {np.std(metrics['f_q_e']):.2f}")
         print(
-            f"Dest Quality f_q(phi(e')): Mean = {np.mean(metrics['f_q_e_prime']):.2f}, Var = {np.var(metrics['f_q_e_prime']):.2f}")
+            f"Dest Quality f_q(phi(e')): Mean = {np.mean(metrics['f_q_e_prime']):.2f}, SD = {np.std(metrics['f_q_e_prime']):.2f}")
         print(
-            f"Transferability delta(e -> e'): Mean = {np.mean(metrics['delta_transferability']):.2f}, Var = {np.var(metrics['delta_transferability']):.2f}")
+            f"Transferability delta(e -> e'): Mean = {np.mean(metrics['delta_transferability']):.2f}, SD = {np.std(metrics['delta_transferability']):.2f}")
         print(
-            f"Transferability % delta(e -> e')%: Mean = {np.mean(metrics['delta_transferability_percentage']):.2f}%, Var = {np.var(metrics['delta_transferability_percentage']):.2f}")
+            f"Transferability % delta(e -> e')%: Mean = {np.mean(metrics['delta_transferability_percentage']):.2f}%, SD = {np.std(metrics['delta_transferability_percentage']):.2f}")
 
 def _plot_results(results: Dict[str, Any], save_fig: bool, exp_name: Optional[str]) -> None:
     """Generates a visual summary of the transferability metrics."""
@@ -204,12 +204,12 @@ def _plot_results(results: Dict[str, Any], save_fig: bool, exp_name: Optional[st
     for idx, (name, metrics) in enumerate(results.items()):
         ax = axes[idx, 0]
         stats_rows = [
-            (r"Source Quality $f_q(e)$:", np.mean(metrics['f_q_e']), np.var(metrics['f_q_e']), ""),
-            (r"Dest Quality $f_q(\Phi(e'))$:", np.mean(metrics['f_q_e_prime']), np.var(metrics['f_q_e_prime']), ""),
+            (r"Source Quality $f_q(e)$:", np.mean(metrics['f_q_e']), np.std(metrics['f_q_e']), ""),
+            (r"Dest Quality $f_q(\Phi(e'))$:", np.mean(metrics['f_q_e_prime']), np.std(metrics['f_q_e_prime']), ""),
             (r"Transferability $\delta_{e \to e'}$:", np.mean(metrics['delta_transferability']),
-             np.var(metrics['delta_transferability']), ""),
+             np.std(metrics['delta_transferability']), ""),
             (r"Transferability % $\delta_{e \to e'} \%$:", np.mean(metrics['delta_transferability_percentage']),
-             np.var(metrics['delta_transferability_percentage']), "%")
+             np.std(metrics['delta_transferability_percentage']), "%")
         ]
         ax.set_title(f"LT: {name}", fontsize=14, fontweight="bold", loc="left", color="#333333")
         ax.axis("off")
@@ -217,11 +217,11 @@ def _plot_results(results: Dict[str, Any], save_fig: bool, exp_name: Optional[st
         ax.add_patch(rect)
         start_y = 0.85
         delta_y = 0.20
-        for i, (label, mean, var, unit) in enumerate(stats_rows):
+        for i, (label, mean, std, unit) in enumerate(stats_rows):
             current_y = start_y - (i * delta_y)
             ax.text(0.05, current_y, label, fontsize=12, ha="left", va="center")
             ax.text(0.60, current_y, f"Mean = {mean:.1f}{unit}", fontsize=12, ha="right", va="center")
-            ax.text(0.95, current_y, f"Var = {var:.1f}{unit}", fontsize=12, ha="right", va="center")
+            ax.text(0.95, current_y, f"SD = {std:.1f}{unit}", fontsize=12, ha="right", va="center")
             if i < len(stats_rows) - 1:
                 ax.axhline(y=current_y - (delta_y / 2), color="gray", linestyle=":", linewidth=0.5, xmin=0.05,
                            xmax=0.95)
@@ -245,11 +245,11 @@ def _print_task_summary_statistics(results: Dict[str, Any]) -> None:
     for name, metrics in results.items():
         print(f"\n=== {name} ===")
         print(
-            f"Orig Task Quality f_q: Mean = {np.mean(metrics['f_q_original']):.2f}, Var = {np.var(metrics['f_q_original']):.2f}")
+            f"Orig Task Quality f_q: Mean = {np.mean(metrics['f_q_original']):.2f}, SD = {np.std(metrics['f_q_original']):.2f}")
         print(
-            f"New Task Quality f_q': Mean = {np.mean(metrics['f_q_prime']):.2f}, Var = {np.var(metrics['f_q_prime']):.2f}")
+            f"New Task Quality f_q': Mean = {np.mean(metrics['f_q_prime']):.2f}, SD = {np.std(metrics['f_q_prime']):.2f}")
         print(
-            f"Task Transferability delta(f_q -> f_q'): Mean = {np.mean(metrics['delta_task_transferability']):.4f}, Var = {np.var(metrics['delta_task_transferability']):.4f}")
+            f"Task Transferability delta(f_q -> f_q'): Mean = {np.mean(metrics['delta_task_transferability']):.4f}, SD = {np.std(metrics['delta_task_transferability']):.4f}")
 
 def _plot_task_results(results: Dict[str, Any], save_fig: bool, exp_name: Optional[str]) -> None:
     """Generates a visual summary of the task transferability metrics."""
@@ -260,10 +260,10 @@ def _plot_task_results(results: Dict[str, Any], save_fig: bool, exp_name: Option
         ax = axes[idx, 0]
         stats_rows = [
             (r"Orig Task Quality $f_q(a^*, e)$:", np.mean(metrics['f_q_original']),
-             np.var(metrics['f_q_original'])),
-            (r"New Task Quality $f_q'(a^*, e)$:", np.mean(metrics['f_q_prime']), np.var(metrics['f_q_prime'])),
+             np.std(metrics['f_q_original'])),
+            (r"New Task Quality $f_q'(a^*, e)$:", np.mean(metrics['f_q_prime']), np.std(metrics['f_q_prime'])),
             (r"Task Transferability $\delta_{f_q \to f_q'}$:", np.mean(metrics['delta_task_transferability']),
-             np.var(metrics['delta_task_transferability']))
+             np.std(metrics['delta_task_transferability']))
         ]
         ax.set_title(f"LT: {name}", fontsize=14, fontweight="bold", loc="left", color="#333333")
         ax.axis("off")
@@ -271,12 +271,12 @@ def _plot_task_results(results: Dict[str, Any], save_fig: bool, exp_name: Option
         ax.add_patch(rect)
         start_y = 0.80
         delta_y = 0.25
-        for i, (label, mean, var) in enumerate(stats_rows):
+        for i, (label, mean, std) in enumerate(stats_rows):
             current_y = start_y - (i * delta_y)
             ax.text(0.05, current_y, label, fontsize=12, ha="left", va="center")
             fmt = ".4f" if i == 2 else ".1f"
             ax.text(0.60, current_y, f"Mean = {mean:{fmt}}", fontsize=12, ha="right", va="center")
-            ax.text(0.95, current_y, f"Var = {var:{fmt}}", fontsize=12, ha="right", va="center")
+            ax.text(0.95, current_y, f"SD = {std:{fmt}}", fontsize=12, ha="right", va="center")
             if i < len(stats_rows) - 1:
                 ax.axhline(y=current_y - (delta_y / 2), color="gray", linestyle=":", linewidth=0.5, xmin=0.05,
                            xmax=0.95)

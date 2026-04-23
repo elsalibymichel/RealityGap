@@ -25,8 +25,8 @@ if __name__ == "__main__":
     env_base = gym.make("CartPole-v1")
 
     experiment_LTs = [
-        create_sb3_technique(PPO, name="PPO", timesteps=3000, policy="MlpPolicy", device='cpu'),
-        create_sb3_technique(DQN, name="DQN", timesteps=3000, policy="MlpPolicy")
+        create_sb3_technique(PPO, name="PPO", timesteps=5000, policy="MlpPolicy", device='cpu'),
+        create_sb3_technique(DQN, name="DQN", timesteps=5000, policy="MlpPolicy")
     ]
 
     print("Starting Task Transferability Study: Standard vs Centered CartPole...")
@@ -38,8 +38,8 @@ if __name__ == "__main__":
         reference_quality=reference_quality,
         reference_quality_prime=reference_quality,
         learning_techniques=experiment_LTs,
-        n_repetitions=30,
-        n_eval_episodes=100,
+        n_repetitions=100,
+        n_eval_episodes=1000,
         save_fig=True,
         exp_name="results/task_transferability_ppo_vs_dqn"
     )
